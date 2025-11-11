@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';
-test.skip(process.env.CI,'Temporarily skipping on CI until stable');
+
 
 test('Logout demo',async ({page}) => {
 
@@ -12,7 +12,7 @@ test('Logout demo',async ({page}) => {
     await page.click('#logout_sidebar_link');
 
     await expect(page).toHaveURL('https://www.saucedemo.com/');
-    await expect(page.locator('#login-button'));
+    await expect(page.locator('#login-button')).toBeVisible();
 
 
 });
