@@ -1,6 +1,5 @@
 import {test,expect} from '@playwright/test';
 
-
 test('Logout demo',async ({page}) => {
 
     await page.goto('https://www.saucedemo.com/');
