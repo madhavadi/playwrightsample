@@ -7,7 +7,7 @@ test('Add to cart demo',async({page}) => {
     await page.fill ('[data-test = "password"]','secret_sauce');
     await page.click('#login-button');
 
-    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');;
 
     await page.click('[data-test = "add-to-cart-sauce-labs-backpack"]');
 
