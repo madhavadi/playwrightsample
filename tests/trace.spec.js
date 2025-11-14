@@ -3,6 +3,6 @@ import {test,expect} from '@playwright/test';
 test('Wrong Intentional test',async ({page}) => {
     await page.goto('https://www.saucedemo.com');
 
-    await expect(page).toHaveTitle('Wrong title');
+    await expect(page).toHaveTitle('Swag Labs');
 }
 );
