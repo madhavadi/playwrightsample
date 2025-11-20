@@ -13,5 +13,6 @@ test('Validation test', async ({request}) => {
 
     expect(typeof body.id).toBe('number');
     expect(typeof body.title).toBe('string');
+    expect(typeof body.body).toBe('string');
 
 });
