@@ -20,6 +20,6 @@ const response = await request.get(SECURE_URL, {
     });
 
     expect(response.status()).toBe(200);
-    console.log('Test passed');
+    console.log('Test passed'); 
 
 });
