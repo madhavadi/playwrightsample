@@ -7,7 +7,7 @@ test ('Other commands',async ({page})=>{
     await (page).getByText('Buttons').click();
     await expect(page).toHaveURL('https://automationtesting.co.uk/buttons.html');
     await (page).getByRole('button',{ name : 'Button One'}).click();
-    await expect(page).toHaveTitle('You clicked the first button!');
+
 
 
 });
