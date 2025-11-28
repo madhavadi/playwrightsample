@@ -14,4 +14,4 @@ test('Viewport simulation',async({page})=>{
     await expect(navlink).not.toBeVisible();
 
     console.log('Test passed');
-})
+});
