@@ -12,4 +12,4 @@ test('Saucedemo validations',async ({page})=>{
     await expect(backpack).toBeTruthy();
     await expect(title).toContainText('Products');
     await page.screenshot({path : 'screenshot.png'});
-})
+});
