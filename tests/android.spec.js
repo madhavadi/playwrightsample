@@ -8,4 +8,4 @@ test ('Android sample',async()=>{
     await expect(page.locator('.login_wrapper')).toBeVisible();
     await context.close();
 }
-);
+); 
