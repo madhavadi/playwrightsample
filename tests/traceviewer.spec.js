@@ -7,7 +7,7 @@ test('Trace viewer enabling',async({page,context})=>{
 
     await expect(page).toHaveTitle(/Playwright/);
 
-    const getstarted = await(page).getByText('Get started');
+    const getstarted = await(page).getByText('Get started');  
 
     await expect(getstarted).toHaveAttribute('href','/docs/intro');
 
