@@ -40,32 +40,33 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testIgnore: '**/android.spec.js',
     },
 
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      testIgnore: '**/android.spec.js',
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },
-
-    {
-      name: 'ci-web-tests', 
-      testIgnore: /android\.spec\.js/, 
-      // ...
+      testIgnore: '**/android.spec.js',
     },
 
     /* Test against mobile viewports. */
      {
        name: 'Mobile Chrome',
        use: { ...devices['Pixel 5'] },
+      testIgnore: '**/android.spec.js',
+
      },
      {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
+      testIgnore: '**/android.spec.js',
+
      },
 
     /* Test against branded browsers. */
