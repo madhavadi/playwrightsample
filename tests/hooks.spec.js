@@ -1,8 +1,11 @@
 import {test,expect} from '@playwright/test';
 
+
+
+
 test.beforeEach('Run before test',async ({page})=>{
 
-    await page.goto('https://youtube.com');
+    await page.goto('https://playwright.dev');
 });
 
 test.afterEach('Run after test',async({page})=>{
@@ -12,15 +15,19 @@ test.afterEach('Run after test',async({page})=>{
 
 
 test('Hooks',async({page})=>{
-    await page.getByPlaceholder('Search').click();
-    await page.getByPlaceholder('Search').fill('whistle podu csk');
     
+   
+    await page.goto('https://playwright.dev');
 
-    await expect(page.getByTitle('Search')).toBeEnabled();
-    await (page).getByTitle('Search').click();
+    await expect(page).toHaveTitle(/Playwright/);
 
-    await page.getByTitle('Official CSK #WhistlePodu Video 2018').click();
-    await expect(page).toHaveURL('https://www.youtube.com/watch?v=OlGfSKcWhdA');
-    
+    const getstarted = await(page).getByText('Get started');  
+
+    await expect(getstarted).toHaveAttribute('href','/docs/intro');
+
+    await getstarted.click();
+
+    await expect(page).toHaveURL('https://playwright.dev/docs/intro');
 }
 );
+
