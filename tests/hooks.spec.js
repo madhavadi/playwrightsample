@@ -17,17 +17,16 @@ test.afterEach('Run after test',async({page})=>{
 test('Hooks',async({page})=>{
     
    
-    await page.goto('https://playwright.dev');
+    
+    await (page). getByRole('link', { name: 'Codegen.' }).click();
+    await expect(page).toHaveURL('https://playwright.dev/docs/codegen');
+    await (page).getByRole('link',{name : 'role, text and test id locators'});
+    const image = await (page).getByAltText('Playwright logo');
+    await expect(image).toBeTruthy();
+    
 
-    await expect(page).toHaveTitle(/Playwright/);
+  
 
-    const getstarted = await(page).getByText('Get started');  
-
-    await expect(getstarted).toHaveAttribute('href','/docs/intro');
-
-    await getstarted.click();
-
-    await expect(page).toHaveURL('https://playwright.dev/docs/intro');
 }
 );
 
