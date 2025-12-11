@@ -1,4 +1,8 @@
 name: Playwright Tests
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 on:
   push:
     branches: [main, test]
@@ -25,3 +29,38 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+
+  deploy-dashboard:
+    needs: [test] 
+    name: Deploy Dashboard
+    runs-on: ubuntu-latest
+    
+   
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      
+    environment:
+      
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      
+      - name: Upload dashboard artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'docs' 
+
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
