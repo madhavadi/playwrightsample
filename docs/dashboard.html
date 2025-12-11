@@ -36,26 +36,7 @@
     </div>
   </header>
 
-  <div class="container">
-    <div class="card">
-      <div class="tabs" id="tabs">
-        <div class="tab active" data-tab="overview">Overview</div>
-        <div class="tab" data-tab="web">Web</div>
-        <div class="tab" data-tab="api">API</div>
-        <div class="tab" data-tab="mobile">Mobile</div>
-        <div class="tab" data-tab="ci">CI/CD History</div>
-      </div>
-
-      <div class="controls">
-        <label>Environment:
-          <select id="envSelect" class="filter">
-            <option value="All">All</option>
-            <option value="Dev">Dev</option>
-            <option value="QA" selected>QA</option>
-            <option value="Stage">Stage</option>
-            <option value="Prod">Prod</option>
-          </select>
-        </label>
+  
 
         <label>Week:
           <select id="weekSelect" class="filter">
@@ -69,14 +50,7 @@
           </select>
         </label>
 
-        <label>Channel:
-          <select id="channelSelect" class="filter">
-            <option value="All" selected>All Channels</option>
-            <option value="Web">Web</option>
-            <option value="API">API</option>
-            <option value="Mobile">Mobile</option>
-          </select>
-        </label>
+        
 
         <button id="resetBtn" style="margin-left:auto; padding:8px 12px; border-radius:6px; border:none; background:#0b5cff; color:#fff; cursor:pointer;">Reset Filters</button>
       </div>
@@ -124,18 +98,14 @@
         </div>
 
         <div class="card">
-          <h2>Top 5 Failing Tests (QA)</h2>
+          <h2>Skipped tests (QA)</h2>
           <table id="failTable">
             <thead><tr><th>Test Case</th><th>Channel</th><th>Last Failure</th><th>Fail Count</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
 
-        <div class="card">
-          <h2>Test Coverage (Functional)</h2>
-          <canvas id="coverageChart"></canvas>
-        </div>
-      </div>
+        
 
     </div> <footer>Interactive HTML Dashboard — Project: madhavadi/playwrightsample. Ready for GitHub Pages deployment.</footer>
   </div>
@@ -149,11 +119,10 @@ const sampleData = {
   // Update this array with your last 5-10 CI runs
   runs: [
     // Latest Run: 175 Passed, 5 Failed/Skipped. Total Executions: 180.
-    {id: 'run-015', date: '25/11/2025', channel: 'Web', env:'QA', status:'Failed', passed: 175, failed: 5}, 
-    {id: 'run-014', date: '24/11/2025', channel: 'API', env:'QA', status:'Passed', passed: 180, failed: 0},
-    {id: 'run-013', date: '23/11/2025', channel: 'Mobile', env:'QA', status:'Passed', passed: 180, failed: 0},
-    {id: 'run-012', date: '22/11/2025', channel: 'Web', env:'Stage', status:'Passed', passed: 180, failed: 0},
-    {id: 'run-011', date: '21/11/2025', channel: 'API', env:'Dev', status:'Passed', passed: 178, failed: 2} // Older failure
+    {id: 'Test summary', date: '11/12/2025', env:'QA', status:'Passes', passed: 175, failed: 5,skipped:5}, 
+    {id: 'Complete CI setup', date: '10/12/2025', env:'QA', status:'Passed', passed: 175, failed: 0,skipped:5},
+    {id: 'Updated changes', date: '08/12/2025', env:'QA', status:'Failed', passed: 172, failed: 3,skipped:5},
+     // Older failure
   ],
   
   // Growth trend based on 36 unique tests
@@ -171,15 +140,11 @@ const sampleData = {
   
   // Top 5 Failing Tests (Based on the 5 skipped/failed executions)
   failures: [
-    {test:'E2E Login flow', channel:'Web', last:'25/11/2025', count:5}, // 5 failures (one per browser)
-    {test:'Checkout - Tax calculation', channel:'Web', last:'21/11/2025', count:2}, 
+    {test:'Android test', channel:'All', last:'09/12/2025', count:5}, // 5 failures (one per browser)
+     
   ],
   
-  // Update with your actual coverage percentages
-  coverage: {
-    labels: ['Core Flows','Edge Cases','Regressions','Browser Support'],
-    coverage: [98, 70, 90, 100]
-  }
+  
 };
 // =========================================================================
 // !!! DO NOT EDIT BELOW THIS LINE - DASHBOARD LOGIC !!!
