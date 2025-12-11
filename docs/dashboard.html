@@ -141,45 +141,41 @@
   </div>
 
 <script>
-// =========================================================================
-// !!! IMPORTANT: EDIT THIS OBJECT TO USE YOUR REAL DATA !!!
-// Total Tests (Unique): 36. Total Executions (36 * 5): 180.
-// =========================================================================
+
 const sampleData = {
-  // Update this array with your last 5-10 CI runs
+  
    runs: [
     
-    {id: 'Test summary', date: '11/12/2025', env:'QA', status:'Passes', passed: 175, failed: 5,skipped:5}, 
-    {id: 'Complete CI setup', date: '10/12/2025', env:'QA', status:'Passed', passed: 175, failed: 0,skipped:5},
-    {id: 'Updated changes', date: '08/12/2025', env:'QA', status:'Failed', passed: 172, failed: 3,skipped:5},
+   
+    {id: 'Test summary', date: '11/12/2025', channel: 'Web', env:'QA', status:'Failed', passed: 175, failed: 5}, 
+    {id: 'Complete CI setup', date: '10/12/2025', channel: 'Web', env:'QA', status:'Passed', passed: 175, failed: 0},
+    {id: 'Updated changes', date: '08/12/2025', channel: 'Web', env:'QA', status:'Failed', passed: 172, failed: 3},
+   
 ],
   
-  // Growth trend based on 36 unique tests
+  
   trend: {
     weeks: ['Week1','Week2','Week3','Week4','Week5','Week6'],
-    executed: [90, 120, 150, 180, 180, 180], // Total executions (tests * browsers)
+    executed: [90, 120, 150, 180, 180, 180], 
     passed: [90, 118, 148, 178, 180, 175]
   },
   
-  // Test Distribution (Unique tests only)
-  distribution: {Web: 28, API: 4, Mobile: 4}, // Total: 36 unique tests
   
-  // Update with your current open defects (based on 5 skipped tests)
+  distribution: {Web: 28, API: 4, Mobile: 4}, 
+  
+  
   defects: {S1: 1, S2: 0, S3: 0}, 
   
-  // Top 5 Failing Tests (Based on the 5 skipped/failed executions)
+  
   
      failures: [
     {test:'Android test', channel:'All', last:'09/12/2025', count:5},
   ],
   
-  // Update with your actual coverage percentages
- 
+
   
 };
-// =========================================================================
-// !!! DO NOT EDIT BELOW THIS LINE - DASHBOARD LOGIC !!!
-// =========================================================================
+
 
 function applyFilters() {
   const env = document.getElementById('envSelect').value;
