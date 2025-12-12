@@ -13,12 +13,22 @@
     },
     {
       "id": "Updated changes",
-      "date": "11/12/2025",
-      "channel": "Web",
+      "date": "12/12/2025",
+      "channel": "All",
       "env": "QA",
       "status": "Failed",
       "passed": 172,
       "failed": 3
+    },
+    {
+        "id": "Updated changes",
+        "date":"11/12/2025",
+        "channel":"All",
+        "env":"QA",
+        "status":"Passed",
+        "passed":175,
+        "failed":5
+
     }
   ],
   "distribution": {
