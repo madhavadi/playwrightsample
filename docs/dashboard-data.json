@@ -1,5 +1,5 @@
 {
-  "totalTests": 36,
+  "totalTests": 35,
   "openDefects": 1,
   "runs": [
     {
@@ -22,9 +22,9 @@
     }
   ],
   "distribution": {
-    "Web": 28,
-    "API": 4,
-    "Mobile": 4
+    "Web": 17,
+    "API": 8,
+    "Mobile": 9
   },
   "defects": {
     "S1": 1,
