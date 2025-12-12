@@ -2,103 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Playwright Automation Summary Dashboard - madhavadi/playwrightsample</title>
+  <title>Automation Summary Dashboard</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f6f8; color: #222; }
     header { background: #0b5cff; color: #fff; padding: 18px 24px; }
     .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
-    .controls { display:flex; gap:12px; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
     .card { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
     .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-bottom:16px; }
     .full { grid-column: 1 / -1; }
-    h2 { margin:0 0 12px 0; font-size:18px; color: #0b5cff; }
+    h2 { margin:0 0 12px 0; font-size:18px; }
     canvas { width:100% !important; height: 260px !important; }
     table { width:100%; border-collapse:collapse; margin-top:8px; }
     th, td { text-align:left; padding:8px; border-bottom:1px solid #eee; font-size:13px; }
-    .tabs { display:flex; gap:8px; margin-bottom:12px; }
-    .tab { padding:8px 12px; background:#e9eefc; border-radius:6px; cursor:pointer; color:#0b5cff; }
-    .tab.active { background:#0b5cff; color:#fff; }
-    .kpi-grid { display:flex; gap:12px; margin-bottom:16px; }
-    .kpi { flex:1; padding:12px; border-radius:8px; background:#fff; text-align:center; border: 1px solid #d8e1ff; }
-    .kpi .value { font-size:24px; font-weight:700; color: #222; }
-    .filter { padding:8px 10px; border-radius:6px; border:1px solid #d8e1ff; background:#fff; }
     footer { text-align:center; padding:14px; color:#666; font-size:13px; }
-    @media (max-width:900px){ .grid{ grid-template-columns: 1fr; } .kpi-grid{ flex-direction:column; } }
+    @media (max-width:900px){ .grid{ grid-template-columns: 1fr; } }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
     <div class="container">
-      <h1 style="margin:0; font-size:20px;">Playwright Automation Summary Dashboard</h1>
-      <div style="font-size:13px; opacity:0.9;">Project: madhavadi/playwrightsample | Environment: QA</div>
+      <h1 style="margin:0; font-size:20px;">Automation Summary Interactive Dashboard</h1>
+      <div style="font-size:13px; opacity:0.9;">Execution Trends, Distribution & CI/CD History</div>
     </div>
   </header>
 
   <div class="container">
     <div class="card">
-      <div class="tabs" id="tabs">
-        <div class="tab active" data-tab="overview">Overview</div>
-        <div class="tab" data-tab="web">Web</div>
-        <div class="tab" data-tab="api">API</div>
-        <div class="tab" data-tab="mobile">Mobile</div>
-        <div class="tab" data-tab="ci">CI/CD History</div>
-      </div>
-
-      <div class="controls">
-        <label>Environment:
-          <select id="envSelect" class="filter">
-            <option value="All">All</option>
-            <option value="Dev">Dev</option>
-            <option value="QA" selected>QA</option>
-            <option value="Stage">Stage</option>
-            <option value="Prod">Prod</option>
-          </select>
-        </label>
-
-        <label>Week:
-          <select id="weekSelect" class="filter">
-            <option value="All">All</option>
-            <option value="Week1">Week 1</option>
-            <option value="Week2">Week 2</option>
-            <option value="Week3">Week 3</option>
-            <option value="Week4">Week 4</option>
-            <option value="Week5">Week 5</option>
-            <option value="Week6" selected>Week 6</option>
-          </select>
-        </label>
-
-        <label>Channel:
-          <select id="channelSelect" class="filter">
-            <option value="All" selected>All Channels</option>
-            <option value="Web">Web</option>
-            <option value="API">API</option>
-            <option value="Mobile">Mobile</option>
-          </select>
-        </label>
-
-        <button id="resetBtn" style="margin-left:auto; padding:8px 12px; border-radius:6px; border:none; background:#0b5cff; color:#fff; cursor:pointer;">Reset Filters</button>
-      </div>
-
-      <div class="kpi-grid">
-        <div class="kpi card">
-          <div style="font-size:12px;color:#666;">Total Test Cases</div>
-          <div class="value" id="kpi-total">36</div>
-          <div style="font-size:12px;color:#777;">(Unique Scenarios)</div>
-        </div>
-        <div class="kpi card">
-          <div style="font-size:12px;color:#666;">Pass Rate</div>
-          <div class="value" id="kpi-pass">97.2%</div>
-          <div style="font-size:12px;color:#777;">(175/180 Executions)</div>
-        </div>
-        <div class="kpi card">
-          <div style="font-size:12px;color:#666;">Open Defects</div>
-          <div class="value" id="kpi-defects">1</div>
-          <div style="font-size:12px;color:#777;">(Severity 1)</div>
-        </div>
-      </div>
-
+      
       <div class="grid">
         <div class="card">
           <h2>Execution Trend (Last 6 Weeks)</h2>
@@ -109,12 +41,7 @@
           <h2>Test Distribution by Channel</h2>
           <canvas id="doughnutChart"></canvas>
         </div>
-
-        <div class="card">
-          <h2>Defect Severity Breakdown</h2>
-          <canvas id="barChart"></canvas>
-        </div>
-
+        
         <div class="card full">
           <h2>Recent Runs & CI/CD Status</h2>
           <table id="runsTable">
@@ -124,110 +51,61 @@
         </div>
 
         <div class="card">
-          <h2>Top 5 Failing Tests (QA)</h2>
+          <h2>Top 5 Failing Tests</h2>
           <table id="failTable">
             <thead><tr><th>Test Case</th><th>Channel</th><th>Last Failure</th><th>Fail Count</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
 
-        <div class="card">
-          <h2>Test Coverage (Functional)</h2>
-          <canvas id="coverageChart"></canvas>
         </div>
-      </div>
 
-    </div> <footer>Interactive HTML Dashboard — Project: madhavadi/playwrightsample. Ready for GitHub Pages deployment.</footer>
+    </div> <footer>Interactive HTML Dashboard — exportable, self-contained. Replace sample data with your real CI artifacts / test reports.</footer>
   </div>
 
 <script>
 
-const sampleData = {
-  
-   runs: [
+let sampleData = {}; 
+
+
+
+fetch('./dashboard-data.json') 
+  .then(response => response.json()) 
+  .then(data => {
+   
+    sampleData = data; 
     
-   
-    {id: 'Updated changes', date: '12/12/2025', channel: 'Web', env:'QA', status:'Failed', passed: 175, failed: 0}, 
-    {id: 'Updated changes', date: '10/12/2025', channel: 'Web', env:'QA', status:'Passed', passed: 170, failed: 5},
-    {id: 'Updated changes', date: '08/12/2025', channel: 'Web', env:'QA', status:'Failed', passed: 172, failed: 3},
-   
-],
-  
-  
-  trend: {
-    weeks: ['Week1','Week2','Week3','Week4','Week5','Week6'],
-    executed: [90, 120, 150, 180, 180, 180], 
-    passed: [90, 118, 148, 178, 180, 175]
-  },
-  
-  
-  distribution: {Web: 28, API: 4, Mobile: 4}, 
-  
-  
-  defects: {S1: 1, S2: 0, S3: 0}, 
-  
-  
-  
-     failures: [
-    {test:'Android test', channel:'All', last:'09/12/2025', count:5},
-  ],
-  
+    
+    createCharts();
+    populateRunsTable(sampleData.runs);
+    populateFailTable(sampleData.failures);
+  })
+  .catch(error => console.error('Error fetching dashboard data:', error));
 
-  
-};
-
-
-function applyFilters() {
-  const env = document.getElementById('envSelect').value;
-  const week = document.getElementById('weekSelect').value;
-  const channel = document.getElementById('channelSelect').value;
-
-  const runs = sampleData.runs.filter(r => (env==='All' || r.env===env) && (channel==='All' || r.channel===channel));
-  
-  updateKpis(runs);
-  populateRunsTable(runs);
-  populateFailTable(sampleData.failures.filter(f => channel==='All' || f.channel===channel));
-  updateCharts(channel);
-}
-
-function updateKpis(runs) {
-  const total = Object.values(sampleData.distribution).reduce((a, b) => a + b, 0); 
-  const openDefects = sampleData.defects.S1 + sampleData.defects.S2 + sampleData.defects.S3;
-
-  const lastRun = runs.length > 0 ? runs[0] : {passed: 0, failed: 0};
-  const lastTotal = lastRun.passed + lastRun.failed;
-  let passRate = lastTotal ? Math.round((lastRun.passed/lastTotal)*1000)/10 : 100; 
-
-  document.getElementById('kpi-total').textContent = total;
-  document.getElementById('kpi-pass').textContent = passRate + '%';
-  document.getElementById('kpi-defects').textContent = openDefects;
-  
-  const passKpi = document.getElementById('kpi-pass');
-  passKpi.style.color = passRate >= 95 ? '#2da44e' : (passRate >= 90 ? '#a4982d' : '#f14c4c');
-}
-
+// --- Runs table ---
 function populateRunsTable(runs) {
   const tbody = document.querySelector('#runsTable tbody');
   tbody.innerHTML = '';
-  runs.slice(0, 10).forEach(r=>{
+  runs.slice(0,20).forEach(r=>{
     const tr = document.createElement('tr');
-    tr.style.color = r.status === 'Passed' ? '#2da44e' : '#f14c4c';
     tr.innerHTML = `<td>${r.id}</td><td>${r.date}</td><td>${r.channel}</td><td>${r.env}</td><td>${r.status}</td><td>${r.passed}</td><td>${r.failed}</td>`;
     tbody.appendChild(tr);
   });
 }
 
+
 function populateFailTable(items) {
   const tbody = document.querySelector('#failTable tbody');
   tbody.innerHTML = '';
-  items.slice(0, 5).forEach(it=>{
+  items.forEach(it=>{
     const tr = document.createElement('tr');
     tr.innerHTML = `<td>${it.test}</td><td>${it.channel}</td><td>${it.last}</td><td>${it.count}</td>`;
     tbody.appendChild(tr);
   });
 }
 
-let trendChart, doughnutChart, barChart, coverageChart;
+// --- Charts ---
+let trendChart, doughnutChart; 
 
 function createCharts() {
   const tctx = document.getElementById('trendChart').getContext('2d');
@@ -236,8 +114,8 @@ function createCharts() {
     data: {
       labels: sampleData.trend.weeks,
       datasets: [
-        {label:'Executed', data: sampleData.trend.executed, fill:false, tension:0.3, borderColor: '#0b5cff'},
-        {label:'Passed', data: sampleData.trend.passed, fill:true, tension:0.3, backgroundColor: 'rgba(45, 164, 78, 0.2)', borderColor: '#2da44e'}
+        {label:'Executed', data: sampleData.trend.executed, fill:false, tension:0.3},
+        {label:'Passed', data: sampleData.trend.passed, fill:true, tension:0.3, backgroundColor: 'rgba(11,92,255,0.08)'}
       ]
     },
     options: { responsive:true, plugins:{legend:{position:'top'}}}
@@ -246,81 +124,18 @@ function createCharts() {
   const dctx = document.getElementById('doughnutChart').getContext('2d');
   doughnutChart = new Chart(dctx, {
     type: 'doughnut',
-    data: { 
-        labels: Object.keys(sampleData.distribution), 
-        datasets: [{ 
-            data: Object.values(sampleData.distribution),
-            backgroundColor: ['#0b5cff', '#5860ff', '#8d94ff']
-        }] 
-    },
-    options: { responsive:true, plugins:{legend:{position:'bottom'}} }
+    data: { labels: Object.keys(sampleData.distribution), datasets: [{ data: Object.values(sampleData.distribution)}] },
+    options: { responsive:true }
   });
-
-  const bctx = document.getElementById('barChart').getContext('2d');
-  barChart = new Chart(bctx, {
-    type: 'bar',
-    data: { 
-        labels: Object.keys(sampleData.defects), 
-        datasets: [{ 
-            label:'Open Defects', 
-            data: Object.values(sampleData.defects),
-            backgroundColor: ['#f14c4c', '#d18616', '#a4982d']
-        }] 
-    },
-    options: { responsive:true, plugins:{legend:{display:false}} }
-  });
-
-  const cctx = document.getElementById('coverageChart').getContext('2d');
-  coverageChart = new Chart(cctx, {
-    type: 'bar',
-    data: { 
-        labels: sampleData.coverage.labels, 
-        datasets: [{ 
-            label:'Coverage %', 
-            data: sampleData.coverage.coverage,
-            backgroundColor: '#2da44e'
-        }] 
-    },
-    options: { responsive:true, plugins:{legend:{display:false}}, scales:{y:{max:100}} }
-  });
+  
+ 
 }
-
-function updateCharts(channel){
-  if(channel === 'All'){
-    doughnutChart.data.datasets[0].data = Object.values(sampleData.distribution);
-  } else {
-    const labels = Object.keys(sampleData.distribution);
-    const data = labels.map(label => label === channel ? sampleData.distribution[label] : 0);
-    doughnutChart.data.datasets[0].data = data;
-  }
-  doughnutChart.update();
-}
-
-document.getElementById('tabs').addEventListener('click', (e)=>{
-  if(!e.target.classList.contains('tab')) return;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  e.target.classList.add('active');
-  const tab = e.target.dataset.tab;
-  if(tab === 'ci') {
-    document.getElementById('envSelect').value = 'All';
-    document.getElementById('channelSelect').value = 'All';
-  }
-  applyFilters();
-});
-
-document.getElementById('resetBtn').addEventListener('click', ()=>{
-  document.getElementById('envSelect').value = 'All';
-  document.getElementById('weekSelect').value = 'All';
-  document.getElementById('channelSelect').value = 'All';
-  applyFilters();
-});
-
-document.getElementById('envSelect').addEventListener('change', applyFilters);
-document.getElementById('weekSelect').addEventListener('change', applyFilters);
-document.getElementById('channelSelect').addEventListener('change', applyFilters);
 
 createCharts();
-applyFilters();
+populateRunsTable(sampleData.runs);
+populateFailTable(sampleData.failures);
+
+
 
 </script>
 </body>

@@ -1,0 +1,50 @@
+{
+  "totalTests": 36,
+  "openDefects": 1,
+  "runs": [
+    {
+      "id": "Updated changes",
+      "date": "12/12/2025",
+      "channel": "All",
+      "env": "QA",
+      "status": "Passed",
+      "passed": 175,
+      "failed": 5
+    },
+    {
+      "id": "Updated changes",
+      "date": "11/12/2025",
+      "channel": "Web",
+      "env": "QA",
+      "status": "Failed",
+      "passed": 172,
+      "failed": 3
+    }
+  ],
+  "distribution": {
+    "Web": 28,
+    "API": 4,
+    "Mobile": 4
+  },
+  "defects": {
+    "S1": 1,
+    "S2": 0,
+    "S3": 0
+  },
+  "trend": {
+    "weeks": ["Wk 1", "Wk 2", "Wk 3", "Wk 4", "Wk 5", "Wk 6"],
+    "executed": [90, 120, 150, 180, 180, 180],
+    "passed": [90, 118, 148, 178, 180, 175]
+  },
+  "failures": [
+    {
+      "test": "Android test(skipped)",
+      "channel": "All",
+      "last": "12/12/2025",
+      "count": 5
+    }
+    
+  ]
+  
+  
+}
